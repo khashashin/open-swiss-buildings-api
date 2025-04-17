@@ -1,0 +1,18 @@
+services:
+    app:
+        build:
+            context: ./
+            target: app-prod
+            dockerfile: docker/Dockerfile
+        restart: unless-stopped
+        depends_on:
+            - database
+            - meilisearch
+        environment:
+            APP_ENV: ${APP_ENV}
+            APP_SECRET: ${APP_SECRET}
+            SERVER_NAME: ${SERVER_NAME}
+            DATABASE_URL: ${DATABASE_URL}
+            MEILISEARCH_DSN: ${MEILISEARCH_DSN}
+        ports:
+            - "7800:80"

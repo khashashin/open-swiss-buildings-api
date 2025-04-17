@@ -5,9 +5,6 @@ services:
             target: app-prod
             dockerfile: docker/Dockerfile
         restart: unless-stopped
-        depends_on:
-            - database
-            - meilisearch
         environment:
             APP_ENV: ${APP_ENV}
             APP_SECRET: ${APP_SECRET}

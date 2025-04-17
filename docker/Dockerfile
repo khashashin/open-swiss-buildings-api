@@ -89,6 +89,7 @@ RUN set -eux; \
     # composer run-script --no-dev post-install-cmd; \
     chmod +x bin/console; \
     chown -R php:php . ; \
+    chmod -R u+rwX var/cache var/log var/data; \
     chmod go+rX public -R ; \
     sync;
 

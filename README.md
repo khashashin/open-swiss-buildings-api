@@ -9,10 +9,10 @@ Additionally, it provides an autocomplete-search for addresses.
 
 ## Background
 
-The application fetches the data about buildings from the two registries (for Switzerland and Liechtenstein) and stores
+This Symfony application fetches the data about buildings from the two registries (for Switzerland and Liechtenstein) and stores
 them in a PostgreSQL database.
 
-For the autocomplete and address resolving, the data is also stores in a search engine.
+For the autocomplete and address resolving, the data is also stores in a search engine (Meilisearch).
 
 ## Usage
 
@@ -55,6 +55,12 @@ We currently handle the following resolving types (inputs):
 - list of building IDs (available only for Switzerland);
 - list of municipality IDs (available only for Switzerland);
 - list of addresses (available only for Switzerland);
+
+### CLI
+
+The Symfony console (available in the application folder as `bin/console`) provides many useful commands to manage and debug the system.
+Run the console without any arguments to list all available commands with descriptions.
+Run `bin/console help <command:name>` to display all details for a command.
 
 ## Glossary
 
@@ -141,6 +147,12 @@ If you don't use the official image, you need to run the following commands as s
 ./bin/console messenger:consume --limit=10 async
 ./bin/console messenger:consume --limit=10 scheduler_default
 ```
+
+### Cronjobs
+
+The Swiss and Liechtenstein registries are imported regularly with the `RegistryDataChRefresherHandler`
+and `RegistryDataLiRefresherHandler` respectively. Those handlers are marked with annotations for
+the Symfony Scheduler. Thus, the messenger workers will run the import every monday morning.
 
 ## Contributing
 
